@@ -2,11 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-
-/**
- * @param <K> Key
- * @param <V> Value
- */
 public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V> {
 	
 	Node<K, V> root;
@@ -14,12 +9,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 	public BST(Node<K, V> root){this.root = root;}
 	int size;
 	
-	/**
-	 * Adds the specified key, value pair to this DefaultMap, duplicate keys are not allowed
-	 * 
-	 * @return true if the addition was successful
-	 * @throws IllegalArgumentException if the key is null
-	 */
 	@Override
 	public boolean put(K key, V value) throws IllegalArgumentException {
 		if(key == null) {
@@ -32,14 +21,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return false;
 	}
 
-	
-	/**
-	 * Replaces the value that maps to the key if it is present
-	 * @param key The key whose mapped value is being replaced
-	 * @param newValue The value to replace the existing value with
-	 * @return true if the key was in this DefaultMap
-	 * @throws IllegalArgumentException if the key is null
-	 */
 	@Override
 	public boolean replace(K key, V newValue) throws IllegalArgumentException {
 		if(key == null) {
@@ -52,13 +33,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return false;
 	}
 
-	
-	/**
-	 * Remove the entry corresponding to the given key
-	 * 
-	 * @return true if remove was successful
-	 * @throws IllegalArgumentException if the key is null
-	 */
 	@Override
 	public boolean remove(K key) throws IllegalArgumentException {
 		if(key == null) {
@@ -72,13 +46,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return false;
 	}
 
-	
-	/**
-	 * Adds the key, value pair to this DefaultMap if it is not present,
-	 * otherwise, replaces the value with the given value
-	 * Does add() and replace() in the same method
-	 * @throws IllegalArgumentException if the key is null
-	 */
 	@Override
 	public void set(K key, V value) throws IllegalArgumentException {
 		if(key == null) {
@@ -87,11 +54,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		root = setRecursive(root, key, value);
 	}
 
-	
-	/**
-	 * @return the value corresponding to the specified key
-	 * @throws IllegalArgumentException if the key is null
-	 */
 	@Override
 	public V get(K key) throws IllegalArgumentException {
 		if(key == null) {
@@ -100,29 +62,16 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return getRecursive(root, key);
 	}
 
-	
-	/**
-	 * @return The number of (key, value) pairs in this DefaultMap
-	 */
 	@Override
 	public int size() {
 		return size;
 	}
 
-	
-	/**
-	 * @return true iff the DefaultMap is empty
-	 */
 	@Override
 	public boolean isEmpty() {
 		return size() == 0;
 	}
 
-	
-	/**
-	 * @return true if the specified key is in this DefaultMap
-	 * @throws IllegalArgumentException if the key is null
-	 */
 	@Override
 	public boolean containsKey(K key) throws IllegalArgumentException {
 		if(key == null) {
@@ -134,11 +83,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return false;
 	}
 
-	
-	/**
-	 * @return an array containing the keys of this DefaultMap. If this DefaultMap is 
-	 * empty, returns array of length zero. 
-	 */
 	@Override
 	public List<K> keys() {
 		ArrayList<K> keys = new ArrayList<>();
@@ -146,13 +90,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return keys;
 	}
 	
-	/* 
-	 * Adds the specified key, value pair to the DefaultMap.
-	 * @param node = element of type Node<K, V>
-	 * @param key
-	 * @param value
-	 * @return node that has to be operated on.
-	 */
 	private Node<K, V> putRecursive(Node<K, V> node, K key, V value) {
 		if(containsKey(key)) {
 			return null;
@@ -172,13 +109,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return null;
 	}
 	
-	
-	/* 
-	 * returns the value corresponding to the specified key.
-	 * @param node = element of type Node<K, V>
-	 * @param key
-	 * @return value if key exists, null otherwise.
-	 */
 	private V getRecursive(Node<K, V> node, K key) {
 		if(node == null) {
 			return null;
@@ -195,14 +125,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return null;
 	}
 	
-
-	/* 
-	 * replaces the value corresponding to the specified key. 
-	 * @param node = element of type Node<K, V>
-	 * @param key
-	 * @param value
-	 * @return node that has to be operated on.
-	 */
 	private Node<K, V> replaceRecursive(Node<K, V> node, K key, V value){
 		if(node == null) {
 			return null;
@@ -216,13 +138,7 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		node.setValue(value);
 		return node;
 	}
-	
-	/* 
-	 * removes the key, value pair corresponding to the specified key.
-	 * @param node = element of type Node<K, V>
-	 * @param key
-	 * @return node that has to be operated on.
-	 */
+
 	private Node<K, V> removeRecursive(Node<K, V> node, K key){
 		if(node == null) {
 			return null;
@@ -252,11 +168,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		}
 	}
 	
-	/* 
-	 * gets the smallest element from the BST.
-	 * @param node = element of type Node<K, V>
-	 * @return the smallest node.
-	 */
 	private Node<K, V> getSmallest(Node<K, V> node){
 		while(node.left == null) {
 			return node;
@@ -264,13 +175,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		return getSmallest(node.left);
 	}
 	
-	/* 
-	 * adds or replaces the key, value pair to the DefaultMap.
-	 * @param node = element of type Node<K, V>
-	 * @param key
-	 * @param value
-	 * @return node that has to be operated on.
-	 */
 	private Node<K, V> setRecursive(Node<K, V> node, K key, V value){
 		if(node == null) {
 			size++;
@@ -290,13 +194,6 @@ public class BST<K extends Comparable<? super K>, V> implements DefaultMap<K, V>
 		}
 	}
 	
-	
-	/* 
-	 * inOrder traversal of BST.
-	 * @param node = element of type Node<K, V>
-	 * @param list = ArrayList of keys.
-	 * @return void
-	 */
 	private void inOrder(Node<K, V> node, ArrayList<K> list) {
 		if(node == null) {
 			return;
